@@ -1,14 +1,51 @@
-{% extends "base.html" %} {% block title %}404 - Page Not Found{% endblock %} {%
-block content %}
+{% extends "base.html" %}
 
-<main class="container py-4">
-  <section class="py-5">
-    <div class="text-center">
-      <h1 class="display-1 text-muted">404</h1>
-      <h2 class="h3 mb-3">Page Not Found</h2>
-      <p class="text-muted mb-4">The page you're looking for doesn't exist.</p>
-      <a href="index.html" class="btn btn-primary">Return Home</a>
+{% block title %}404 - Page Not Found{% endblock %}
+
+{% block content %}
+<!-- PAGE TITLE -->
+<header>
+  <h1 class="h4">Oops! Page Not Found</h1>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb small">
+      <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
+      <li class="breadcrumb-item text-muted active" aria-current="page">404 Error</li>
+    </ol>
+  </nav>
+</header>
+
+<!-- section -->
+<div class="section">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body text-center py-5">
+          <div class="mb-4">
+            <svg width="120" height="120" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-muted">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor" opacity="0.3"/>
+              <path d="M12 7v2m0 4v6m0-9h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <h1 class="display-4 fw-bold text-primary mb-3">404</h1>
+          <h2 class="h4 mb-3">{{ title if title else "Page Not Found" }}</h2>
+          <p class="text-muted mb-4">
+            The page you're looking for doesn't exist or has been moved.
+            <br>Let's get you back on track.
+          </p>
+
+          <div class="d-flex gap-2 justify-content-center">
+            <a href="{{ url_for('index') }}" class="btn btn-primary">
+              <i class="fi fi-home me-2"></i>Return Home
+            </a>
+            <button onclick="history.back()" class="btn btn-outline-primary">
+              <i class="fi fi-arrow-left me-2"></i>Go Back
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-  </section>
-</main>
+  </div>
+</div>
+<!-- /section -->
 {% endblock %}

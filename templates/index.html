@@ -1,51 +1,69 @@
 {% extends "base.html" %}
 
-{% block title %}Database Dashboard{% endblock %}
+{% block title %}Dashboard - Smarty v5{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-12">
-        <div class="jumbotron bg-light p-5 rounded-3">
-            <h1 class="display-4">Database Dashboard</h1>
-            <p class="lead">Welcome to your SQLite database management interface.</p>
-            <hr class="my-4">
-            <p>Navigate through users, posts, and comments using the navigation bar above.</p>
+<!-- PAGE TITLE -->
+<header>
+  <h1 class="h4">Good morning, John!</h1>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb small">
+      <li class="breadcrumb-item text-muted active" aria-current="page">You've got 2 new sales today</li>
+    </ol>
+  </nav>
+</header>
+
+<!-- section -->
+<div class="section">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body text-center">
+          <i class="fi fi-people display-4 text-primary"></i>
+          <h5 class="card-title mt-3">Users</h5>
+          <p class="card-text">{{ stats.users if stats else '0' }} registered users</p>
+          <a href="{{ url_for('users') }}" class="btn btn-primary">View Users</a>
         </div>
+      </div>
     </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body text-center">
+          <i class="fi fi-document display-4 text-success"></i>
+          <h5 class="card-title mt-3">Posts</h5>
+          <p class="card-text">{{ stats.posts if stats else '0' }} total posts</p>
+          <a href="{{ url_for('posts') }}" class="btn btn-success">View Posts</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body text-center">
+          <i class="fi fi-comment display-4 text-warning"></i>
+          <h5 class="card-title mt-3">Analytics</h5>
+          <p class="card-text">{{ stats.comments if stats else '0' }} total interactions</p>
+          <a href="#" class="btn btn-warning">View Analytics</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Welcome to Smarty v5</h5>
+          <p class="card-text">Your modern admin dashboard with comprehensive features and beautiful design.</p>
+          <div class="d-flex gap-2">
+            <a href="#" class="btn btn-primary">Get Started</a>
+            <a href="#" class="btn btn-outline-primary">Documentation</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<div class="row mt-4">
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body text-center">
-                <i class="bi bi-people-fill display-4 text-primary"></i>
-                <h5 class="card-title mt-3">Users</h5>
-                <p class="card-text">{{ stats.users }} registered users</p>
-                <a href="{{ url_for('users') }}" class="btn btn-primary">View Users</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body text-center">
-                <i class="bi bi-file-text-fill display-4 text-success"></i>
-                <h5 class="card-title mt-3">Posts</h5>
-                <p class="card-text">{{ stats.posts }} total posts</p>
-                <a href="{{ url_for('posts') }}" class="btn btn-success">View Posts</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body text-center">
-                <i class="bi bi-chat-fill display-4 text-warning"></i>
-                <h5 class="card-title mt-3">Comments</h5>
-                <p class="card-text">{{ stats.comments }} total comments</p>
-                <a href="#" class="btn btn-warning">View Comments</a>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- /section -->
 {% endblock %}
