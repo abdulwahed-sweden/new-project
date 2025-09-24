@@ -159,7 +159,7 @@
                   <div class="dropdown-header bg-primary bg-gradient rounded rounded-bottom-0 text-white small p-4">
                     <span class="d-block fw-medium text-truncate">John Doe</span>
                     <span class="d-block smaller fw-medium text-truncate">john.doe@gmail.com</span>
-                    <span class="d-block smaller"><b>Last Login:</b> 2019-09-03 01:48</span>
+                    <span class="d-block smaller"><b>Last Login:</b> <span data-timestamp="2019-09-03 01:48">2019-09-03 01:48</span></span>
                   </div>
 
                   <div class="dropdown-divider mb-3"></div>
@@ -309,6 +309,83 @@
     <!-- Core javascripts -->
     <script src="{{ url_for('static', filename='js/core.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/vendor_bundle.min.js') }}"></script>
+
+    <!-- Relative Time Helper -->
+    <script>
+      function formatRelativeTime(timestamp) {
+        // Handle both string and Date objects
+        const inputDate = typeof timestamp === 'string' ? new Date(timestamp) : timestamp;
+        const now = new Date();
+
+        // Check if date is valid
+        if (isNaN(inputDate.getTime())) {
+          return timestamp; // Return original if invalid
+        }
+
+        const diffInMs = now - inputDate;
+        const diffInSeconds = Math.floor(diffInMs / 1000);
+        const diffInMinutes = Math.floor(diffInSeconds / 60);
+        const diffInHours = Math.floor(diffInMinutes / 60);
+        const diffInDays = Math.floor(diffInHours / 24);
+
+        // Less than 1 minute
+        if (diffInSeconds < 60) {
+          return "Just now";
+        }
+
+        // Less than 1 hour
+        if (diffInMinutes < 60) {
+          return diffInMinutes === 1 ? "1 minute ago" : `${diffInMinutes} minutes ago`;
+        }
+
+        // Less than 24 hours
+        if (diffInHours < 24) {
+          return diffInHours === 1 ? "1 hour ago" : `${diffInHours} hours ago`;
+        }
+
+        // Yesterday (less than 48 hours but more than 24)
+        if (diffInDays === 1) {
+          return "Yesterday";
+        }
+
+        // Less than 7 days
+        if (diffInDays < 7) {
+          return `${diffInDays} days ago`;
+        }
+
+        // For older dates, return formatted date
+        const options = {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        };
+        return inputDate.toLocaleDateString(undefined, options);
+      }
+
+      // Auto-update relative timestamps on page load
+      document.addEventListener('DOMContentLoaded', function() {
+        // Find all elements with data-timestamp attribute
+        const timestampElements = document.querySelectorAll('[data-timestamp]');
+
+        timestampElements.forEach(element => {
+          const timestamp = element.getAttribute('data-timestamp');
+          const relativeTime = formatRelativeTime(timestamp);
+          element.textContent = relativeTime;
+
+          // Store original timestamp in title for hover tooltip
+          element.title = timestamp;
+        });
+
+        // Update timestamps every minute
+        setInterval(() => {
+          timestampElements.forEach(element => {
+            const timestamp = element.getAttribute('data-timestamp');
+            const relativeTime = formatRelativeTime(timestamp);
+            element.textContent = relativeTime;
+          });
+        }, 60000); // Update every minute
+      });
+    </script>
 
     {% block scripts %}{% endblock %}
 

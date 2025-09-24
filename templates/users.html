@@ -30,7 +30,7 @@ block content %}
             <td>{{ user.id }}</td>
             <td><strong>{{ user.username }}</strong></td>
             <td>{{ user.email }}</td>
-            <td>{{ user.created_at }}</td>
+            <td><span data-timestamp="{{ user.created_at }}">{{ user.created_at }}</span></td>
             <td>
               <button class="btn btn-sm btn-outline-primary">
                 <i class="bi bi-eye"></i> View
