@@ -1,15 +1,31 @@
-{% extends "base.html" %} {% block title %}Users - Database App{% endblock %} {%
-block content %}
-<div class="d-flex justify-content-between align-items-center mb-4">
-  <h2><i class="bi bi-people-fill"></i> Users</h2>
-  <button
-    class="btn btn-primary"
-    data-bs-toggle="modal"
-    data-bs-target="#addUserModal"
-  >
-    <i class="bi bi-plus-circle"></i> Add User
-  </button>
-</div>
+{% extends "base.html" %}
+
+{% block title %}Users - Smarty v5{% endblock %}
+
+{% block content %}
+<!-- PAGE TITLE -->
+<header>
+  <h1 class="h4">User Management</h1>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb small">
+      <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
+      <li class="breadcrumb-item text-muted active" aria-current="page">Users</li>
+    </ol>
+  </nav>
+</header>
+
+<!-- section -->
+<div class="section">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fi fi-people"></i> Users</h2>
+    <button
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#addUserModal"
+    >
+      <i class="fi fi-plus"></i> Add User
+    </button>
+  </div>
 
 <div class="card">
   <div class="card-body">
@@ -33,7 +49,7 @@ block content %}
             <td><span data-timestamp="{{ user.created_at }}">{{ user.created_at }}</span></td>
             <td>
               <button class="btn btn-sm btn-outline-primary">
-                <i class="bi bi-eye"></i> View
+                <i class="fi fi-eye"></i> View
               </button>
             </td>
           </tr>
@@ -91,6 +107,8 @@ block content %}
         </div>
       </form>
     </div>
+    </div>
   </div>
 </div>
+<!-- /section -->
 {% endblock %}
